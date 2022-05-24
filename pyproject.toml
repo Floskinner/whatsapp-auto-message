@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "whatsapp-auto-message"
+name = "whatsappMessanger"
 version = "0.1.0"
 description = "Send automated messages via Selenium / WhatsApp Web to your friends"
 authors = ["Florian Glaser <58706771+Floskinner@users.noreply.github.com>"]
