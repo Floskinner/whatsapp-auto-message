@@ -36,6 +36,8 @@ class MyArgparser(argparse.ArgumentParser):
             help="The message to send",
         )
 
+        self.parse_args()
+
     def get_names(self) -> List[str]:
         """Get all target Names
 
