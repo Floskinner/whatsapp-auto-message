@@ -25,7 +25,7 @@ optional arguments:
                         The message to send
 ```
 
-If you download the chrome driver a lot, you need to set the env "GH_TOKEN" with your personal token. See [GH_TOKEN]([https://github.com/SergeyPirogov/webdriver_manager#gh_token]) <br>
+If you download the chrome driver a lot, you need to set the env "GH_TOKEN" with your personal token. See [GH_TOKEN](https://github.com/SergeyPirogov/webdriver_manager#gh_token) <br>
 
 At each start of the programm you need to connect whatsapp again with your phone. After that all given names will recive the message.
 
