@@ -1,0 +1,10 @@
+*.md
+__pycache__
+.env
+*example*
+.git
+.vscode
+.venv
+*cache*
+.github
+dist
