@@ -6,3 +6,6 @@ build:
 
 clean_docker:
 	docker rm --force whatsapp-messanger
+
+requirements:
+	poetry export -f requirements.txt --output requirements.txt --without-hashes
