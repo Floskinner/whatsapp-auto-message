@@ -1,8 +1,8 @@
 buildkit:
-	DOCKER_BUILDKIT=1 docker build -t whatsappMessanger .
+	DOCKER_BUILDKIT=1 docker build -t whatsapp-messanger .
 
 build:
-	docker build -t whatsappMessanger .
+	docker build -t whatsapp-messanger .
 
 clean_docker:
-	docker rm --force whatsappMessanger
+	docker rm --force whatsapp-messanger

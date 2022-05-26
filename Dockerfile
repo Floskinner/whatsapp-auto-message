@@ -17,9 +17,10 @@ RUN $HOME/.local/bin/poetry export -f requirements.txt --output requirements.txt
 FROM python:3.9
 
 # Install Dependencies
-COPY --from=requirements-stage /tmp/requirements.txt /tmp/requirements.txt
+# COPY --from=requirements-stage /tmp/requirements.txt /tmp/requirements.txt
+COPY requirements.txt /tmp/requirements.txt
 RUN /usr/local/bin/python -m pip install --upgrade pip && \
-    pip install --no-cache-dir --upgrade -r /tmp/requirements.txt
+    pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Install Firefox
 RUN apt-get update && apt-get install -y \
