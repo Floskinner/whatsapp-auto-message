@@ -1,4 +1,6 @@
 import argparse
+import sys
+from datetime import datetime
 from typing import List
 
 from whatsappMessanger.messanger import WhatsAppMessanger
@@ -7,10 +9,19 @@ from whatsappMessanger.messanger import WhatsAppMessanger
 def main():
     my_parser = MyArgparser("WhatsApp Bot", "Send messages to your friends")
 
-    messanger = WhatsAppMessanger()
+    choice = input(
+        f'Sure so send messages to {my_parser.get_names()} with "{my_parser.get_message()}" at {my_parser.get_timestamp()}? [Y,N]'
+    )
 
+    if choice != "Y":
+        print("...exit")
+        sys.exit()
+
+    messanger = WhatsAppMessanger()
     for target in my_parser.get_names():
-        messanger.send_message(target, my_parser.get_message)
+        messanger.send_message(
+            target, my_parser.get_message(), my_parser.get_timestamp()
+        )
 
 
 class MyArgparser(argparse.ArgumentParser):
@@ -36,7 +47,16 @@ class MyArgparser(argparse.ArgumentParser):
             help="The message to send",
         )
 
-        self.parse_args()
+        self.add_argument(
+            "-t",
+            "--timestamp",
+            dest="time",
+            type=str,
+            required=False,
+            help="Add a timestamp when to send the message: dd.mm.yyyy hh:mm",
+        )
+
+        self.__args = self.parse_args()
 
     def get_names(self) -> List[str]:
         """Get all target Names
@@ -44,7 +64,7 @@ class MyArgparser(argparse.ArgumentParser):
         Returns:
             List[str]: List of names
         """
-        names = [name.strip() for name in self.parse_args().names]
+        names = [name.strip() for name in self.__args.names]
         return names
 
     def get_message(self) -> str:
@@ -53,7 +73,16 @@ class MyArgparser(argparse.ArgumentParser):
         Returns:
             str: Message
         """
-        return self.parse_args().message.strip()
+        return self.__args.message.strip()
+
+    def get_timestamp(self) -> datetime:
+        """Get the datetime when to send the message
+
+        Returns:
+            datetime: timestamp
+        """
+        timestamp_str = self.__args.time.strip()
+        return datetime.strptime(timestamp_str, "%d.%m.%Y %H:%M")
 
 
 if __name__ == "__main__":
