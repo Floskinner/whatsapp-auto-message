@@ -10,6 +10,9 @@ python = "^3.9"
 selenium = "^4.1.5"
 pypng = "^0.0.21"
 webdriver-manager = "^3.7.0"
+PyQRCode = "^1.2.1"
+pyzbar = "^0.1.9"
+Pillow = "^9.1.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"

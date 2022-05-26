@@ -2,14 +2,14 @@ import time
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 
 from whatsappMessanger.tools import load_storage
+from whatsappMessanger.tools import print_qr_to_terminal_from_image
 from whatsappMessanger.tools import save_storage
 
 
@@ -18,8 +18,8 @@ class Browser:
 
     def __init__(self):
         options = self._get_options()
-        self.__driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()), options=options
+        self.__driver = webdriver.Firefox(
+            executable_path=GeckoDriverManager().install(), options=options
         )
         self.__phone_connected = False
 
@@ -56,6 +56,7 @@ class Browser:
             return False
 
         if qr_code.screenshot("QR_Code.png"):
+            print_qr_to_terminal_from_image("QR_Code.png")
             self._check_if_no_longer_available('//canvas[@aria-label="Scan me!"]')
             self._save_local_storage()
             self.__phone_connected = True
@@ -109,10 +110,8 @@ class Browser:
 
     def _get_options(self) -> Options:
         options = Options()
-        # options.add_argument("--headless") # Only in Version 59 -> WhatsApp need 60+
-        # options.add_argument("--disable-gpu")
-        # options.add_argument("--window-size=1920,1080")
-        # options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("--headless")
+        options.add_argument("--window-size=1920,1080")
         return options
 
     def __del__(self):

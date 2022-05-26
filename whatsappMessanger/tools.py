@@ -2,6 +2,11 @@ import json
 from pathlib import Path
 from typing import Union
 
+import pyqrcode
+from PIL import Image
+from pyzbar.pyzbar import decode
+
+
 parent_folder = Path(__file__).parent.resolve()
 
 
@@ -31,3 +36,16 @@ def load_storage(save_name: str = "storage.json") -> Union[dict, None]:
         return None
     with full_path.open(mode="r", encoding="utf8") as file:
         return json.load(file)
+
+
+def print_qr_to_terminal_from_image(name: str, path: Path = Path.cwd()):
+    """Print a QR Code from a terminal to the console
+
+    Args:
+        name (str): Name of the saved QR-Code
+        path (Path, optional): Path of the `dir` to the file. Defaults to Path.cwd().
+    """
+    full_path = path.joinpath(name)
+    data = decode(Image.open(full_path.absolute()))
+    terminal_qr = pyqrcode.create(data[0].data)
+    print(terminal_qr.terminal())
