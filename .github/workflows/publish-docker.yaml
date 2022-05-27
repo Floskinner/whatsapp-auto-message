@@ -3,7 +3,6 @@ name: Docker
 on:
   push:
     branches:
-      - 'main'
       - 'dev-docker'
     tags:
       - "v1.**"
