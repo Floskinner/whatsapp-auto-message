@@ -76,9 +76,12 @@ class Browser:
         person = self._check_if_available(f'//span[contains(@title, "{target}")]')
         person.click()
 
-    def _write_message(self, msg) -> WebElement:
+    def _write_message(self, msg: str) -> WebElement:
         input_field = self._check_if_available('//div[@title="Schreib eine Nachricht"]')
-        input_field.send_keys(msg)
+        for char in msg:  # need to add all chars one by one
+            input_field.send_keys(
+                char
+            )  # send_keys only add one char to the input filed (in this case)
         return input_field
 
     def _check_if_available(self, xpath: str) -> WebElement:
