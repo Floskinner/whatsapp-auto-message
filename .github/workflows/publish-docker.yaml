@@ -1,4 +1,4 @@
-name: docker
+name: Docker
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   docker:
+    environment: Docker
     runs-on: ubuntu-latest
     steps:
       -
@@ -26,4 +27,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: user/app:latest
+          tags: floskinner/whatsauto:latest
