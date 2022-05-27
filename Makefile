@@ -1,5 +1,5 @@
 buildkit:
-	DOCKER_BUILDKIT=1 docker build -t whatsapp-messanger .
+	DOCKER_BUILDKIT=1 docker build --progress=plain -t whatsapp-messanger .
 
 build:
 	docker build -t whatsapp-messanger .
