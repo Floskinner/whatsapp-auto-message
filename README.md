@@ -1,4 +1,7 @@
-# whatsapp-auto-message
+# whatsapp-auto-message <!-- omit in toc -->
+[![Docker Pulls](https://img.shields.io/docker/pulls/floskinner/whatsauto?style=plastic)](https://hub.docker.com/r/floskinner/whatsauto) <br>
+<br>
+
 Send automated messages via Selenium / WhatsApp Web to your friends.<br>
 This is just a little personal project with a lot to do. There are many better tools out there in GitHub to use! :) <br>
 <br>
@@ -6,6 +9,17 @@ This is just a little personal project with a lot to do. There are many better t
 
 But hey, it works... ¯\\\_(ツ)\_/¯ <br>
 _For now it is just a bad version of the bulk function from whatsapp itself with an optinal timestamp and **Docker**(⊙o⊙)_
+<br>
+<br>
+
+- [- Legal](#--legal)
+- [Usage](#usage)
+- [Known Errors](#known-errors)
+- [Docker](#docker)
+- [Build the container:](#build-the-container)
+- [Planned features](#planned-features)
+- [Legal](#legal)
+---
 
 ## Usage
 Install the `requirements.txt` or use poetry.<br>
@@ -74,32 +88,12 @@ AttributeError: 'Browser' object has no attribute '_Browser__driver'
 -> You have to add GH_TOKEN
 ## Docker
 Now you can use it with docker! 🚀🥳<br>
-But you still have to create you local Docker-Image (for now) <br>
 
-## Build the container:
-```console
-# From GitHub
-DOCKER_BUILDKIT=1 docker build -t whatsapp-messanger https://github.com/Floskinner/whatsapp-auto-message.git#main
-
-# or without docker-buildkit
-docker build -t whatsapp-messanger https://github.com/Floskinner/whatsapp-auto-message.git#main
-```
-```console
-# From code
-git clone https://github.com/Floskinner/whatsapp-auto-message.git
-cd whatsapp-auto-message
-DOCKER_BUILDKIT=1 docker build -t whatsapp-messanger .
-
-# or without docker-buildkit
-docker build -t whatsapp-messanger .
-```
-
-## Use the container
 Use it just like the normal programm with the parameters at the end.<br>
 ❗ **Always use -y!** ❗<br>
 ❗ **Don`t forget to scan the QR-Code** ❗ ...in the console. So if you want detached mode, make sure to scan the code.
 ```console
-docker run --name my-whatsapp-messanger whatsapp-messanger -h
+docker run floskinner/whatsauto -h
 usage: WhatsApp Bot [-h] -n NAMES [NAMES ...] -m MESSAGE [-y] [-t TIME]
                     [-g TOKEN]
 
@@ -123,21 +117,45 @@ optional arguments:
 Here some examples:
 ```console
 # Wake one Friend at given time
-docker run whatsapp-messanger -n "My Friend" -m "Wake Up!!!" -t "20.04.2022 04:20" --token "gh_s3u9r2e4I2t8e3l6l2y4o2u5t2h2i2s" -y
+docker run floskinner/whatsauto -n "My Friend" -m "Wake Up!" -t "20.04.2022 04:20" --token "gh_s3u9r2e4I2t8e3l6l2y4o2u5t2h2i2s" -y
 
 # Set the GH_TOKEN in the ENV
-docker run --env "GH_TOKEN=gh_s3u9r2e4I2t8e3l6l2y4o2u5t2h2i2s" whatsapp-messanger -n "My Friend" -m "Wake Up!!!" -t "20.04.2022 04:20" -y
+docker run --env "GH_TOKEN=gh_s3u9r2e4I2t8e3l6l2y4o2u5t2h2i2s" floskinner/whatsauto -n "My Friend" -m "Wake Up!" -t "20.04.2022 04:20" -y
 
 # Send a message to two friends
-docker run whatsapp-messanger -n "My Friend" "Other friend" -m "Wake Up!!!" -t "20.04.2022 04:20" --token "gh_s3u9r2e4I2t8e3l6l2y4o2u5t2h2i2s" -y
+docker run floskinner/whatsauto -n "My Friend" "Other friend" -m "Wake Up!" -t "20.04.2022 04:20" --token "gh_s3u9r2e4I2t8e3l6l2y4o2u5t2h2i2s" -y
+```
+
+🤫 **Pro tip**... You can add `--name my-container` to the `run` command. If you do so, you can start the container with the same settings only with: `docker start my-container`
+
+## Build the container:
+```console
+# From GitHub
+DOCKER_BUILDKIT=1 docker build -t whatsauto https://github.com/Floskinner/whatsapp-auto-message.git#main
+
+# or without docker-buildkit
+docker build -t whatsauto https://github.com/Floskinner/whatsapp-auto-message.git#main
+```
+```console
+# From code
+git clone https://github.com/Floskinner/whatsapp-auto-message.git
+cd whatsapp-auto-message
+DOCKER_BUILDKIT=1 docker build -t whatsauto .
+
+# or without docker-buildkit
+docker build -t whatsauto .
 ```
 
 ## Planned features
 - [ ] Set some datetime settings (✅) and a intervall for sending the messages
 - [ ] Saves the Login with your phone (after each restart of the programm you have to login again)
 - [X] Headless usage (only with Firefox)
-- [ ] Publish the docker image
+- [X] [Publish](https://hub.docker.com/r/floskinner/whatsauto) the docker image
 - [ ] Random selection of multiple messages
 - [ ] Read the settinngs from a file
 - [ ] Improved Exception handling
 - [ ] (Implement some other messanger)
+
+## Legal
+
+This code is in no way affiliated with, authorized, maintained, sponsored or endorsed by WhatsApp or any of its affiliates or subsidiaries. This is an independent and unofficial software. _Use at your own risk._
