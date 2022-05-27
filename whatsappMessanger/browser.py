@@ -38,7 +38,7 @@ class Browser:
             self._open_target(target)
             input_field = self._write_message(msg)
             input_field.send_keys(Keys.ENTER)
-            time.sleep(10)
+            time.sleep(60)  # TODO: Check if message is sent and not just "random" wait
             self._close_whatsapp()
         else:
             raise Exception("First connect the Phone with `connect_phone()`!")
