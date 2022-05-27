@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'dev-docker'
-      - 'main'
     tags:
       - "v1.**"
 
