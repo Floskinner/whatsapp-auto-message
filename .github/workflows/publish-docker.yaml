@@ -42,4 +42,4 @@ jobs:
         with:
           push: true
           tags: floskinner/whatsauto:latest
-          platforms: linux/amd64,linux/arm64,linux/armhf
+          platforms: linux/amd64,linux/arm64 #,linux/armhf does not work...
