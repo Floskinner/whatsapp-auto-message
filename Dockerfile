@@ -19,10 +19,6 @@ RUN apt-get update && apt-get install -y \
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Install poetry
-ARG POETRY_VERSION
-RUN /usr/local/bin/python -m pip install --upgrade pip && pip install poetry==${POETRY_VERSION}
-
 ### Create the requirements.txt from poetry ###
 FROM base as requirements-stage
 
@@ -42,7 +38,7 @@ RUN python -m venv ${VIRTUAL_ENV}
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 # Install Dependencies
-COPY --from=requirements-stage "/tmp/requirements.txt" "/tmp/requirements.txt"
+COPY "requirements.txt" "/tmp/requirements.txt"
 RUN ${VIRTUAL_ENV}/bin/python -m pip install --upgrade pip && \
     ${VIRTUAL_ENV}/bin/python -m pip install --no-cache-dir -r "/tmp/requirements.txt"
 
